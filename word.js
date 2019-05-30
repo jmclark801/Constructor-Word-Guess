@@ -11,10 +11,25 @@ function Word() {
 
   this.getLetters = function () {
     this.letters.forEach(letter => {
-      console.log("I'm logging letters");
       this.displayLetters.push(letter.displayResult());
     });
     return this.displayLetters.join('');
+  }
+
+  this.checkGuess = function (guess) {
+    this.letters.forEach(letter => {
+      var correctGuess = letter.handleGuess(guess);
+      console.log(`value of correctGuess = ${correctGuess}`)
+      return correctGuess;
+    });
+  }
+
+  this.isWordGuessed = function(){
+    if (this.displayLetters.includes('_')) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
 
