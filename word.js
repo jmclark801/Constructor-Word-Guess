@@ -1,4 +1,5 @@
 var Letter = require('./letter.js');
+var correctGuess = false;
 
 function Word() {
   this.letters = [];
@@ -10,6 +11,7 @@ function Word() {
   }
 
   this.getLetters = function () {
+    this.displayLetters = [];
     this.letters.forEach(letter => {
       this.displayLetters.push(letter.displayResult());
     });
@@ -18,8 +20,12 @@ function Word() {
 
   this.checkGuess = function (guess) {
     this.letters.forEach(letter => {
-      var correctGuess = letter.handleGuess(guess);
-      console.log(`value of correctGuess = ${correctGuess}`)
+      if (letter.handleGuess(guess)) {
+        correctGuess = true;
+        letter.handleGuess(guess);
+      } else {
+        correctGuess = false;
+      }
       return correctGuess;
     });
   }
@@ -34,25 +40,3 @@ function Word() {
 }
 
 module.exports = Word;
-
-// function Student(name, favSubject, gpa){
-//   this.name = name,
-//   this.favSubject = favSubject,
-//   this.gpa = gpa
-// // }
-
-// // module.exports = Student;
-
-// function Classroom() {
-//   this.students = [];
-//   this.numberOfStudents = this.students.length;
-//   this.professorName = "";
-//   this.roomNumber = "";
-//   this.addStudent = function (name, favSubject, gpa) {
-//     this.students.push(new Student(name, favSubject, gpa));
-//   };
-// }
-
-// var science101 = new Classroom();
-// science101.addStudent("Jim", "JS", "2.9")
-// console.log(science101.students);

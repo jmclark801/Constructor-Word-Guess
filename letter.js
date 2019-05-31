@@ -9,10 +9,10 @@ function Letter(letter) {
       }
     }
   this.handleGuess = function (guess) {
-    if (guess === this.letter) {
+    if (guess.toLowerCase() === this.letter) {
       this.guessed = true;
       return true;
-    }
+    } 
   }
 }
 

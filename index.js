@@ -9,15 +9,19 @@ var display = ""
 
 function initialize() {
   newWord = new Word();
-  wordList = ["bulldog", "beagle", "Greyhound"]
+  wordList = ["bulldog", "beagle", "greyhound"]
   wordToGuess = wordList[Math.floor(Math.random() * wordList.length)];
   for (let letter of wordToGuess) {
     newWord.addLetter(letter);
   }
-   console.log("Word to Guess: ", newWord.letters)
+}
+
+function playAgain(){
+  console.log("This feature needs to be implemented still")
 }
 
 function prompt(){
+
   inquirer.prompt([
     {
       type: 'input',
@@ -26,39 +30,36 @@ function prompt(){
     }
   ]).then(answers => {
     var userGuess = answers.guess
-    console.log(`You guessed ${userGuess}!`)
+    console.log(`\nYou guessed ${userGuess}!\n`)
+
     correctGuess = newWord.checkGuess(userGuess);
-    console.log(`Was this guess correct? ${correctGuess}`);
     display = newWord.getLetters();
-    console.log(`Word to Guess: ${display}`);
-    console.log(`Is the word guessed? ${newWord.isWordGuessed()}` )
+    console.log(`Word to Guess: ${display}\n`);
     if (newWord.isWordGuessed() === false) {
       prompt()
     } else {
-      console.log("You win!");
+      console.log(`\n\n*****   YOU WIN !!!   *****\n\n`);
+      playAgain()
     }
   })
+  
 }
 
 function playGame(){
+  console.log(`\n\nWelcome to the Word Guess Game!\n\n*******************************\n`)
   initialize();
+  display = newWord.getLetters();
+  console.log(`\nWord to Guess: ${display}\n`);
   prompt();
 }
 
 playGame();
 
-
-
-
-// Display Word
-// Get letter from user
+// Allow user to play again
 // Determine if guess matches 
 //// Correct case
 //// Incorrect case
-//// Update display to show new word
 // nice to haves:
-// Ingore case
 // Allow words with spaces
 // Get word from API or database
 // Allow certain number of guesses
-// Update readme
